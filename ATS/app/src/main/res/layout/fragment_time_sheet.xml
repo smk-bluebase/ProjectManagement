@@ -35,11 +35,11 @@
                 android:paddingRight="15dp" >
 
                 <TextView
-                    android:id="@+id/reportTitle"
+                    android:id="@+id/timeSheetTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:text="Report"
+                    android:text="TimeSheet"
                     android:layout_centerHorizontal="true"
                     android:textColor="@color/c1"
                     android:textSize="27sp"

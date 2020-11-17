@@ -35,7 +35,7 @@
                 android:paddingRight="15dp" >
 
                 <TextView
-                    android:id="@+id/recentActivityTitle"
+                    android:id="@+id/profileTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
@@ -43,6 +43,178 @@
                     android:layout_centerHorizontal="true"
                     android:textColor="@color/c1"
                     android:textSize="27sp"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:id="@+id/editButton"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentRight="true"
+                    android:src="@drawable/edit_button"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginBottom="10dp" />
+
+                <TextView
+                    android:id="@+id/name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/profileTitle"
+                    android:layout_marginTop="20dp"
+                    android:text="Name :"
+                    android:textColor="#619d6f"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/nameValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/profileTitle"
+                    android:layout_toRightOf="@id/name"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:text="-"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/gender"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/nameValue"
+                    android:layout_marginTop="20dp"
+                    android:text="Gender :"
+                    android:textColor="#619d6f"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/genderValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/nameValue"
+                    android:layout_toRightOf="@id/gender"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:text="-"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/email"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/genderValue"
+                    android:layout_marginTop="20dp"
+                    android:text="Email :"
+                    android:textColor="#619d6f"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/emailValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/genderValue"
+                    android:layout_toRightOf="@id/email"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:text="-"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/address"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/emailValue"
+                    android:layout_marginTop="20dp"
+                    android:text="Address :"
+                    android:textColor="#619d6f"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/addressValue"
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/emailValue"
+                    android:layout_toRightOf="@id/address"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:text="-"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/city"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/addressValue"
+                    android:layout_marginTop="20dp"
+                    android:text="City :"
+                    android:textColor="#619d6f"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/cityValue"
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/addressValue"
+                    android:layout_toRightOf="@id/city"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:text="-"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/profileRegDate"
+                    android:layout_width="115dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/cityValue"
+                    android:layout_marginTop="20dp"
+                    android:text="Profile Reg Date      :"
+                    android:textColor="#619d6f"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/profileRegDateValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/cityValue"
+                    android:layout_toRightOf="@id/profileRegDate"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginLeft="5dp"
+                    android:text="-"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/profileLastUpdationDate"
+                    android:layout_width="115dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/profileRegDateValue"
+                    android:layout_marginTop="20dp"
+                    android:text="Profile Last Updation Date      : "
+                    android:textColor="#619d6f"
+                    android:textSize="15sp"
+                    android:layout_marginBottom="20dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/profileLastUpdationDateValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/profileRegDateValue"
+                    android:layout_toRightOf="@id/profileLastUpdationDate"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginLeft="5dp"
+                    android:text="-"
+                    android:textSize="15sp"
                     android:textStyle="bold" />
 
             </RelativeLayout>

@@ -26,6 +26,50 @@
                         android:icon="@drawable/report"
                         android:title="Report"/>
 
+                    <item android:id="@+id/nav_task_allocation"
+                        android:icon="@drawable/task_allocation"
+                        android:title="Task Allocation"/>
+
+                    <item android:id="@+id/nav_time_sheet"
+                        android:icon="@drawable/time_sheet"
+                        android:title="TimeSheet"/>
+
+                    <item android:id="@+id/nav_time_sheet_timer"
+                        android:icon="@drawable/time_sheet_timer"
+                        android:title="TimeSheet Timer"/>
+
+                    <item android:id="@+id/nav_daily_report"
+                        android:icon="@drawable/daily_report"
+                        android:title="Daily Report"/>
+
+                    <item android:id="@+id/nav_daily_allocated_tasks"
+                        android:icon="@drawable/daily_allocated_tasks"
+                        android:title="Daily Allocated Tasks"/>
+
+                    <item android:id="@+id/nav_daily_project_report"
+                        android:icon="@drawable/daily_project_report"
+                        android:title="Daily Project Report"/>
+
+                    <item android:id="@+id/nav_projectwise_report"
+                        android:icon="@drawable/projectwise_report"
+                        android:title="Projectwise Report"/>
+
+                    <item android:id="@+id/nav_userwise_report"
+                        android:icon="@drawable/userwise_report"
+                        android:title="Userwise Report"/>
+
+                    <item android:id="@+id/nav_customer_master"
+                        android:icon="@drawable/customer_master"
+                        android:title="Customer Master"/>
+
+                    <item android:id="@+id/nav_time_sheet_approval"
+                        android:icon="@drawable/timesheet_approval"
+                        android:title="TimeSheet Approval"/>
+
+                    <item android:id="@+id/nav_project_master"
+                        android:icon="@drawable/project_master"
+                        android:title="Project Master"/>
+
                 </group>
             </menu>
 
