@@ -20,14 +20,15 @@ import android.widget.TextView;
 
 import com.google.android.material.navigation.NavigationView;
 
+import java.util.Deque;
 import java.util.LinkedList;
-import java.util.Queue;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     Context context = this;
+    String userName;
     String email;
     private DrawerLayout drawer;
-    public Queue<String> recentActivityQueue;
+    private Deque<String> recentActivityQueue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -35,6 +36,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_main);
 
         Intent intent = getIntent();
+        userName = intent.getStringExtra("userName");
         email = intent.getStringExtra("email");
 
         Toolbar toolBar = findViewById(R.id.toolbar);
@@ -71,18 +73,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     .commit();
             navigationView.setCheckedItem(R.id.nav_home);
 
-            String[] initializeArray = {"taskCreationFragment",
-                                        "reportFragment",
-                                        "taskAllocationFragment",
-                                        "timeSheetFragment",
-                                        "timeSheetTimerFragment",
-                                        "dailyReportFragment",
-                                        "dailyAllocatedTasksFragment",
-                                        "dailyProjectReportFragment",
-                                        "projectwiseReportFragment"};
-
-            for(int i = 0; i < initializeArray.length; i++){
-                recentActivityQueue.add(initializeArray[i]);
+            for(int i = 0; i < 12; i++){
+                recentActivityQueue.add(CommonUtils.fragmentArray[i]);
             }
         }
 
@@ -104,154 +96,165 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
                 getSupportFragmentManager()
                         .beginTransaction()
-                        .addToBackStack("profileFragment")
-                        .replace(R.id.fragment_container, new ProfileFragment(), "profileFragment")
+                        .addToBackStack(CommonUtils.fragmentArray[0])
+                        .replace(R.id.fragment_container, new ProfileFragment(), CommonUtils.fragmentArray[0])
                         .commit();
-                if(!recentActivityQueue.remove("profileFragment")) recentActivityQueue.remove();
-                recentActivityQueue.add("profileFragment");
+                if(!recentActivityQueue.remove(CommonUtils.fragmentArray[0])) recentActivityQueue.removeLast();
+                recentActivityQueue.addFirst(CommonUtils.fragmentArray[0]);
+                break;
+
+            case R.id.nav_change_password:
+                getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .addToBackStack(CommonUtils.fragmentArray[1])
+                        .replace(R.id.fragment_container, new ChangePasswordFragment(), CommonUtils.fragmentArray[1])
+                        .commit();
+                if(!recentActivityQueue.remove(CommonUtils.fragmentArray[1])) recentActivityQueue.removeLast();
+                recentActivityQueue.addFirst(CommonUtils.fragmentArray[1]);
                 break;
 
             case R.id.nav_task_creation:
                 getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
                 getSupportFragmentManager()
                         .beginTransaction()
-                        .addToBackStack("taskCreationFragment")
-                        .replace(R.id.fragment_container, new TaskCreationFragment(), "taskCreationFragment")
+                        .addToBackStack(CommonUtils.fragmentArray[2])
+                        .replace(R.id.fragment_container, new TaskCreationFragment(), CommonUtils.fragmentArray[2])
                         .commit();
-                if(!recentActivityQueue.remove("taskCreationFragment"))recentActivityQueue.remove();
-                recentActivityQueue.add("taskCreationFragment");
+                if(!recentActivityQueue.remove(CommonUtils.fragmentArray[2]))recentActivityQueue.removeLast();
+                recentActivityQueue.addFirst(CommonUtils.fragmentArray[2]);
                 break;
 
             case R.id.nav_report:
                 getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
                 getSupportFragmentManager()
                         .beginTransaction()
-                        .addToBackStack("reportFragment")
-                        .replace(R.id.fragment_container, new ReportFragment(), "reportFragment")
+                        .addToBackStack(CommonUtils.fragmentArray[3])
+                        .replace(R.id.fragment_container, new ReportFragment(), CommonUtils.fragmentArray[3])
                         .commit();
-                if(!recentActivityQueue.remove("reportFragment")) recentActivityQueue.remove();
-                recentActivityQueue.add("reportFragment");
+                if(!recentActivityQueue.remove(CommonUtils.fragmentArray[3])) recentActivityQueue.removeLast();
+                recentActivityQueue.addFirst(CommonUtils.fragmentArray[3]);
                 break;
 
             case R.id.nav_task_allocation:
                 getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
                 getSupportFragmentManager()
                         .beginTransaction()
-                        .addToBackStack("taskAllocationFragment")
-                        .replace(R.id.fragment_container, new TaskAllocationFragment(), "taskAllocationFragment")
+                        .addToBackStack(CommonUtils.fragmentArray[4])
+                        .replace(R.id.fragment_container, new TaskAllocationFragment(), CommonUtils.fragmentArray[4])
                         .commit();
-                if(!recentActivityQueue.remove("taskAllocationFragment")) recentActivityQueue.remove();
-                recentActivityQueue.add("taskAllocationFragment");
+                if(!recentActivityQueue.remove(CommonUtils.fragmentArray[4])) recentActivityQueue.removeLast();
+                recentActivityQueue.addFirst(CommonUtils.fragmentArray[4]);
                 break;
 
             case R.id.nav_time_sheet:
                 getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
                 getSupportFragmentManager()
                         .beginTransaction()
-                        .addToBackStack("timeSheetFragment")
-                        .replace(R.id.fragment_container, new TimeSheetFragment(), "timeSheetFragment")
+                        .addToBackStack(CommonUtils.fragmentArray[5])
+                        .replace(R.id.fragment_container, new TimeSheetFragment(), CommonUtils.fragmentArray[5])
                         .commit();
-                if(!recentActivityQueue.remove("timeSheetFragment")) recentActivityQueue.remove();
-                recentActivityQueue.add("timeSheetFragment");
+                if(!recentActivityQueue.remove(CommonUtils.fragmentArray[5])) recentActivityQueue.removeLast();
+                recentActivityQueue.addFirst(CommonUtils.fragmentArray[5]);
                 break;
 
             case R.id.nav_time_sheet_timer:
                 getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
                 getSupportFragmentManager()
                         .beginTransaction()
-                        .addToBackStack("timeSheetTimeFragment")
-                        .replace(R.id.fragment_container, new TimeSheetTimerFragment(), "timeSheetTimerFragment")
+                        .addToBackStack(CommonUtils.fragmentArray[6])
+                        .replace(R.id.fragment_container, new TimeSheetTimerFragment(), CommonUtils.fragmentArray[6])
                         .commit();
-                if(!recentActivityQueue.remove("timeSheetTimeFragment")) recentActivityQueue.remove();
-                recentActivityQueue.add("timeSheetTimeFragment");
+                if(!recentActivityQueue.remove(CommonUtils.fragmentArray[6])) recentActivityQueue.removeLast();
+                recentActivityQueue.addFirst(CommonUtils.fragmentArray[6]);
                 break;
 
             case R.id.nav_daily_report:
                 getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
                 getSupportFragmentManager()
                         .beginTransaction()
-                        .addToBackStack("dailyReportFragment")
-                        .replace(R.id.fragment_container, new DailyReportFragment(), "dailyReportFragment")
+                        .addToBackStack(CommonUtils.fragmentArray[7])
+                        .replace(R.id.fragment_container, new DailyReportFragment(), CommonUtils.fragmentArray[7])
                         .commit();
-                if(!recentActivityQueue.remove("dailyReportFragment")) recentActivityQueue.remove();
-                recentActivityQueue.add("dailyReportFragment");
+                if(!recentActivityQueue.remove(CommonUtils.fragmentArray[7])) recentActivityQueue.removeLast();
+                recentActivityQueue.addFirst(CommonUtils.fragmentArray[7]);
                 break;
 
             case R.id.nav_daily_allocated_tasks:
                 getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
                 getSupportFragmentManager()
                         .beginTransaction()
-                        .addToBackStack("dailyAllocationTasksFragment")
-                        .replace(R.id.fragment_container, new DailyAllocatedTasksFragment(), "dailyAllocatedTasksFragment")
+                        .addToBackStack(CommonUtils.fragmentArray[8])
+                        .replace(R.id.fragment_container, new DailyAllocatedTasksFragment(), CommonUtils.fragmentArray[8])
                         .commit();
-                if(!recentActivityQueue.remove("dailyAllocationTasksFragment")) recentActivityQueue.remove();
-                recentActivityQueue.add("dailyAllocationTasksFragment");
+                if(!recentActivityQueue.remove(CommonUtils.fragmentArray[8])) recentActivityQueue.removeLast();
+                recentActivityQueue.addFirst(CommonUtils.fragmentArray[8]);
                 break;
 
             case R.id.nav_daily_project_report:
                 getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
                 getSupportFragmentManager()
                         .beginTransaction()
-                        .addToBackStack("dailyProjectReportFragment")
-                        .replace(R.id.fragment_container, new DailyProjectReportFragment(), "dailyProjectReportFragment")
+                        .addToBackStack(CommonUtils.fragmentArray[9])
+                        .replace(R.id.fragment_container, new DailyProjectReportFragment(), CommonUtils.fragmentArray[9])
                         .commit();
-                if(!recentActivityQueue.remove("dailyProjectReportFragment")) recentActivityQueue.remove();
-                recentActivityQueue.add("dailyProjectReportFragment");
+                if(!recentActivityQueue.remove(CommonUtils.fragmentArray[9])) recentActivityQueue.removeLast();
+                recentActivityQueue.addFirst(CommonUtils.fragmentArray[9]);
                 break;
 
             case R.id.nav_projectwise_report:
                 getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
                 getSupportFragmentManager()
                         .beginTransaction()
-                        .addToBackStack("projectwiseReportFragment")
-                        .replace(R.id.fragment_container, new ProjectWiseReportFragment(), "projectwiseReportFragment")
+                        .addToBackStack(CommonUtils.fragmentArray[10])
+                        .replace(R.id.fragment_container, new ProjectWiseReportFragment(), CommonUtils.fragmentArray[10])
                         .commit();
-                if(!recentActivityQueue.remove("projectwiseReportFragment")) recentActivityQueue.remove();
-                recentActivityQueue.add("projectwiseReportFragment");
+                if(!recentActivityQueue.remove(CommonUtils.fragmentArray[10])) recentActivityQueue.removeLast();
+                recentActivityQueue.addFirst(CommonUtils.fragmentArray[10]);
                 break;
 
             case R.id.nav_userwise_report:
                 getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
                 getSupportFragmentManager()
                         .beginTransaction()
-                        .addToBackStack("userwiseReportFragment")
-                        .replace(R.id.fragment_container, new UserWiseReportFragment(), "userwiseReportFragment")
+                        .addToBackStack(CommonUtils.fragmentArray[11])
+                        .replace(R.id.fragment_container, new UserWiseReportFragment(), CommonUtils.fragmentArray[11])
                         .commit();
-                if(!recentActivityQueue.remove("userwiseReportFragment")) recentActivityQueue.remove();
-                recentActivityQueue.add("userwiseReportFragment");
+                if(!recentActivityQueue.remove(CommonUtils.fragmentArray[11])) recentActivityQueue.removeLast();
+                recentActivityQueue.addFirst(CommonUtils.fragmentArray[11]);
                 break;
 
             case R.id.nav_customer_master:
                 getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
                 getSupportFragmentManager()
                         .beginTransaction()
-                        .addToBackStack("customerMasterFragment")
-                        .replace(R.id.fragment_container, new CustomerFragment(), "customerMasterFragment")
+                        .addToBackStack(CommonUtils.fragmentArray[12])
+                        .replace(R.id.fragment_container, new CustomerFragment(), CommonUtils.fragmentArray[12])
                         .commit();
-                if(!recentActivityQueue.remove("customerMasterFragment")) recentActivityQueue.remove();
-                recentActivityQueue.add("customerMasterFragment");
+                if(!recentActivityQueue.remove(CommonUtils.fragmentArray[12])) recentActivityQueue.removeLast();
+                recentActivityQueue.addFirst(CommonUtils.fragmentArray[12]);
                 break;
 
             case R.id.nav_time_sheet_approval:
                 getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
                 getSupportFragmentManager()
                         .beginTransaction()
-                        .addToBackStack("timeSheetApprovalFragment")
-                        .replace(R.id.fragment_container, new TimeSheetApprovalFragment(), "timeSheetApprovalFragment")
+                        .addToBackStack(CommonUtils.fragmentArray[13])
+                        .replace(R.id.fragment_container, new TimeSheetApprovalFragment(), CommonUtils.fragmentArray[13])
                         .commit();
-                if(!recentActivityQueue.remove("timeSheetApprovalFragment")) recentActivityQueue.remove();
-                recentActivityQueue.add("timeSheetApprovalFragment");
+                if(!recentActivityQueue.remove(CommonUtils.fragmentArray[13])) recentActivityQueue.removeLast();
+                recentActivityQueue.addFirst(CommonUtils.fragmentArray[13]);
                 break;
 
             case R.id.nav_project_master:
                 getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
                 getSupportFragmentManager()
                         .beginTransaction()
-                        .addToBackStack("projectMasterFragment")
-                        .replace(R.id.fragment_container, new ProjectMasterFragment(), "projectMasterFragment")
+                        .addToBackStack(CommonUtils.fragmentArray[14])
+                        .replace(R.id.fragment_container, new ProjectMasterFragment(), CommonUtils.fragmentArray[14])
                         .commit();
-                if(!recentActivityQueue.remove("projectMasterFragment")) recentActivityQueue.remove();
-                recentActivityQueue.add("projectMasterFragment");
+                if(!recentActivityQueue.remove(CommonUtils.fragmentArray[14])) recentActivityQueue.removeLast();
+                recentActivityQueue.addFirst(CommonUtils.fragmentArray[14]);
                 break;
 
         }
@@ -261,8 +264,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return true;
     }
 
-    public Queue<String> getRecentActivityQueue(){
+    public void setRecentActivityQueue(Deque<String> recentActivityQueue) {
+        this.recentActivityQueue = recentActivityQueue;
+    }
+
+    public Deque<String> getRecentActivityQueue(){
         return recentActivityQueue;
+    }
+
+    public void setUserName(String userName){
+        this.userName = userName;
+    }
+
+    public String getUserName(){
+        return userName;
     }
 
     @Override

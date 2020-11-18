@@ -25,6 +25,8 @@ import org.json.JSONObject;
 public class LoginActivity extends AppCompatActivity {
     Context context = this;
     JsonObject jsonObject;
+    EditText userNameEditText1;
+    EditText passwordEditText;
 
     String urlLogin = CommonUtils.IP + "/ATS/atsandroid/login.php";
     String urlForgotPassword = CommonUtils.IP + "/ATS/atsandroid/forgotpasswordgenerator.php";
@@ -50,8 +52,8 @@ public class LoginActivity extends AppCompatActivity {
         layoutParams.setMargins(0, 0, 200, height);
         background.setLayoutParams(layoutParams);
 
-        final EditText userNameEditText1 = findViewById(R.id.userName);
-        final EditText passwordEditText = findViewById(R.id.password);
+        userNameEditText1 = findViewById(R.id.userName);
+        passwordEditText = findViewById(R.id.password);
         userNameEditText1.setText(username);
         passwordEditText.setText(password);
 
@@ -152,6 +154,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 if(jsonObject.getBoolean("status")){
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                    intent.putExtra("userName", userNameEditText1.getText().toString());
                     intent.putExtra("email", jsonObject.getString("email"));
                     startActivity(intent);
                 }else {
