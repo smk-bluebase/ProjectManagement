@@ -1,4 +1,4 @@
-package bluebase.in.ats;
+package bluebase.in.project_management;
 
 import android.content.Context;
 
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
     public void useAppContext() {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
-        assertEquals("bluebase.in.ats", appContext.getPackageName());
+        assertEquals("bluebase.in.project_management", appContext.getPackageName());
     }
 }

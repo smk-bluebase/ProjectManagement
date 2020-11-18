@@ -1,4 +1,4 @@
-package bluebase.in.ats;
+package bluebase.in.project_management;
 
 public class CommonUtils {
     static String IP = "http://10.0.2.2";

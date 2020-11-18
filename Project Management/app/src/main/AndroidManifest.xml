@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="bluebase.in.ats">
+    package="bluebase.in.project_management">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -13,11 +13,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:networkSecurityConfig="@xml/network_security_config">
-        <activity android:name=".ForgotPasswordActivity"/>
-        <activity android:name=".SignUpActivity"/>
-        <activity android:name=".MainActivity"
+        <activity android:name="bluebase.in.project_management.ForgotPasswordActivity"/>
+        <activity android:name="bluebase.in.project_management.SignUpActivity"/>
+        <activity android:name="bluebase.in.project_management.MainActivity"
             android:theme="@style/AppTheme.NoActionBar"/>
-        <activity android:name=".LoginActivity">
+        <activity android:name="bluebase.in.project_management.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

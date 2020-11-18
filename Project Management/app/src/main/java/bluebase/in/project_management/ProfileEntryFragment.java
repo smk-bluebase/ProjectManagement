@@ -1,4 +1,4 @@
-package bluebase.in.ats;
+package bluebase.in.project_management;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -7,9 +7,10 @@ import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.JsonObject;
@@ -22,24 +23,27 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-public class ProfileFragment extends Fragment {
+public class ProfileEntryFragment extends Fragment {
     Context context;
     ProgressDialog progressDialog;
     JsonObject jsonObject;
 
-    TextView name;
-    TextView userName;
-    TextView email;
-    TextView empId;
-    TextView mobileNo;
-    TextView profile;
+    EditText name;
+    EditText userName;
+    EditText email;
+    EditText empId;
+    EditText mobileNo;
+    EditText profile;
+
+    String originalUserName;
 
     String urlGetProfile = CommonUtils.IP + "/ATS/atsandroid/getProfileDetails.php";
+    String urlEditProfile = CommonUtils.IP + "/ATS/atsandroid/editProfileDetails.php";
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_profile, container, false);
+        View view = inflater.inflate(R.layout.fragment_profile_entry, container, false);
 
         DisplayMetrics displayMetrics = new DisplayMetrics();
         getActivity().getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
@@ -51,22 +55,34 @@ public class ProfileFragment extends Fragment {
         layoutParams.setMargins(0, 0, 200, height);
         background.setLayoutParams(layoutParams);
 
-        name = view.findViewById(R.id.nameValue);
-        userName = view.findViewById(R.id.userNameValue);
-        email = view.findViewById(R.id.emailValue);
-        empId = view.findViewById(R.id.empIdValue);
-        mobileNo = view.findViewById(R.id.mobileNoValue);
-        profile = view.findViewById(R.id.profileValue);
+        name = view.findViewById(R.id.name);
+        userName = view.findViewById(R.id.userName);
+        email = view.findViewById(R.id.email);
+        empId = view.findViewById(R.id.empId);
+        mobileNo = view.findViewById(R.id.mobileNo);
+        profile = view.findViewById(R.id.profile);
 
-        ImageView editButton = view.findViewById(R.id.editButton);
-        editButton.setOnClickListener(new View.OnClickListener() {
+        Button update = view.findViewById(R.id.update);
+
+        update.setOnClickListener(new View.OnClickListener(){
             @Override
-            public void onClick(View v) {
-                getActivity().getSupportFragmentManager()
-                        .beginTransaction()
-                        .addToBackStack("profileEntryFragment")
-                        .replace(R.id.fragment_container, new ProfileEntryFragment(), "profileEntryFragment")
-                        .commit();
+            public void onClick(View view) {
+                progressDialog = new ProgressDialog(getContext());
+                progressDialog.setCancelable(false);
+                progressDialog.setMessage("Loading...");
+                progressDialog.show();
+
+                jsonObject = new JsonObject();
+                jsonObject.addProperty("name", name.getText().toString());
+                jsonObject.addProperty("userName", userName.getText().toString());
+                jsonObject.addProperty("originalUserName", originalUserName);
+                jsonObject.addProperty("emailId", email.getText().toString());
+                jsonObject.addProperty("empId", empId.getText().toString());
+                jsonObject.addProperty("mobileNo", mobileNo.getText().toString());
+                jsonObject.addProperty("profile", profile.getText().toString());
+
+                PostEditProfile postEditProfile = new PostEditProfile(context);
+                postEditProfile.checkServerAvailability(2);
             }
         });
 
@@ -80,7 +96,7 @@ public class ProfileFragment extends Fragment {
 
         context = getContext();
 
-        progressDialog = new ProgressDialog(context);
+        progressDialog = new ProgressDialog(getContext());
         progressDialog.setCancelable(false);
         progressDialog.setMessage("Loading...");
         progressDialog.show();
@@ -108,7 +124,7 @@ public class ProfileFragment extends Fragment {
         }
 
         @Override
-        public void onFinish(JSONArray jsonArray) {
+        public void onFinish(JSONArray jsonArray){
             progressDialog.dismiss();
 
             try{
@@ -116,6 +132,7 @@ public class ProfileFragment extends Fragment {
 
                 if(jsonObject.getBoolean("status")){
                     name.setText(jsonObject.getString("name"));
+                    originalUserName = jsonObject.getString("userName");
                     userName.setText(jsonObject.getString("userName"));
                     email.setText(jsonObject.getString("email"));
                     empId.setText(jsonObject.getString("empId"));
@@ -123,6 +140,42 @@ public class ProfileFragment extends Fragment {
                     profile.setText(jsonObject.getString("profile"));
                 }else{
                     Toast.makeText(context, "Data Fetch Error", Toast.LENGTH_SHORT).show();
+                }
+
+            }catch (JSONException e){
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private class PostEditProfile extends PostRequest{
+        public PostEditProfile(Context context){
+            super(context);
+        }
+
+        @Override
+        public void serverAvailability(boolean isServerAvailable){
+            if(isServerAvailable){
+                super.postRequest(urlEditProfile, jsonObject);
+            }else{
+                Toast.makeText(context, "Connection to the server \nnot Available", Toast.LENGTH_SHORT).show();
+                progressDialog.dismiss();
+            }
+        }
+
+        @Override
+        public void onFinish(JSONArray jsonArray){
+            progressDialog.dismiss();
+
+            try{
+                JSONObject jsonObject = (JSONObject) jsonArray.get(0);
+
+                if(jsonObject.getBoolean("status")){
+                    Toast.makeText(context, "Updated Successfully", Toast.LENGTH_SHORT).show();
+                    ((MainActivity) getActivity()).setUserName(userName.getText().toString());
+                    getActivity().getSupportFragmentManager().popBackStack();
+                }else {
+                    Toast.makeText(context, "Update unsuccessful", Toast.LENGTH_SHORT).show();
                 }
 
             }catch(JSONException e){

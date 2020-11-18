@@ -5,7 +5,7 @@ android {
     buildToolsVersion "30.0.0"
 
     defaultConfig {
-        applicationId "bluebase.in.ats"
+        applicationId "bluebase.in.project_management"
         minSdkVersion 24
         targetSdkVersion 30
         versionCode 1

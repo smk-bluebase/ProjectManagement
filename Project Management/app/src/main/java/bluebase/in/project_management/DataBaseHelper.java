@@ -1,4 +1,4 @@
-package bluebase.in.ats;
+package bluebase.in.project_management;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -11,7 +11,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     Context context;
 
     public DataBaseHelper(@Nullable Context context) {
-        super(context, "ats.sqlite", null, 1);
+        super(context, "project_management.sqlite", null, 1);
         this.context = context;
     }
 

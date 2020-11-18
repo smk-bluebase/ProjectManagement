@@ -1,4 +1,4 @@
-package bluebase.in.ats;
+package bluebase.in.project_management;
 
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -12,12 +12,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-public class CustomerFragment extends Fragment  {
+public class DailyReportFragment extends Fragment {
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_customer_master, container, false);
+        View view = inflater.inflate(R.layout.fragment_daily_report, container, false);
 
         DisplayMetrics displayMetrics = new DisplayMetrics();
         getActivity().getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
