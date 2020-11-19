@@ -14,13 +14,13 @@
         android:src="@drawable/back_arrow" />
 
     <TextView
-        android:id="@+id/atsTitle"
+        android:id="@+id/projectManagementTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:layout_marginTop="30dp"
-        android:text="ATS"
-        android:textSize="30dp" />
+        android:text="Project Management"
+        android:textSize="20dp" />
 
     <TextView
         android:id="@+id/email"

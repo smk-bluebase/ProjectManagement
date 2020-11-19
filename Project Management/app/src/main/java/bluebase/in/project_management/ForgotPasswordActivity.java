@@ -26,7 +26,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
     Context context = this;
     JsonObject jsonObject;
 
-    String urlForgotPasswordVerifier = CommonUtils.IP + "/ATS/atsandroid/forgotpasswordverifier.php";
+    String urlForgotPasswordVerifier = CommonUtils.IP + "/ATS/atsandroid/forgotPasswordVerifier.php";
 
     ProgressDialog progressDialog;
 

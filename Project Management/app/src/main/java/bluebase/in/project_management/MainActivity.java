@@ -291,7 +291,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 getSupportFragmentManager().popBackStack();
             }else {
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
-                alertDialogBuilder.setCancelable(false);
+                alertDialogBuilder.setCancelable(true);
                 alertDialogBuilder.setTitle("ATS");
                 alertDialogBuilder.setMessage("Do you want to logout?");
                 alertDialogBuilder.setPositiveButton(android.R.string.ok,
@@ -302,7 +302,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                 startActivity(intent);
                             }
                         });
-
                 final AlertDialog alertDialog = alertDialogBuilder.create();
                 alertDialog.show();
             }
