@@ -2,6 +2,7 @@ package bluebase.in.project_management;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
@@ -21,18 +22,20 @@ import org.json.JSONObject;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 public class ChangePasswordFragment extends Fragment {
     Context context;
     ProgressDialog progressDialog;
     JsonObject jsonObject;
 
-    EditText currentPassword;
-    EditText newPassword;
-    EditText retypePassword;
+    EditText currentPasswordEditText;
+    EditText newPasswordEditText;
+    EditText retypePasswordEditText;
 
-    String urlChangePassword = CommonUtils.IP + "/ATS/atsandroid/changepassword.php";
+    String urlChangePassword = CommonUtils.IP + "/ATS/atsandroid/changePassword.php";
 
     @Nullable
     @Override
@@ -51,20 +54,24 @@ public class ChangePasswordFragment extends Fragment {
 
         context = getActivity().getApplicationContext();
 
-        currentPassword = view.findViewById(R.id.currentPassword);
-        newPassword = view.findViewById(R.id.newPassword);
-        retypePassword = view.findViewById(R.id.retypePassword);
+        currentPasswordEditText = view.findViewById(R.id.currentPassword);
+        newPasswordEditText = view.findViewById(R.id.newPassword);
+        retypePasswordEditText = view.findViewById(R.id.retypePassword);
 
         Button changePassword = view.findViewById(R.id.changePassword);
 
         changePassword.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                if(!currentPassword.getText().equals("")){
-                    if(!newPassword.getText().equals("")){
-                        if(!retypePassword.getText().equals("")){
-                            if(newPassword.getText().equals(retypePassword.getText())) {
-                                progressDialog = new ProgressDialog(context);
+                String currentPassword = currentPasswordEditText.getText().toString();
+                String newPassword = newPasswordEditText.getText().toString();
+                String retypePassword = retypePasswordEditText.getText().toString();
+
+                if(!currentPassword.equals("")){
+                    if(!newPassword.equals("")){
+                        if(!retypePassword.equals("")){
+                            if(newPassword.equals(retypePassword)) {
+                                progressDialog = new ProgressDialog(getContext());
                                 progressDialog.setCancelable(false);
                                 progressDialog.setMessage("Loading...");
                                 progressDialog.show();
@@ -73,8 +80,8 @@ public class ChangePasswordFragment extends Fragment {
                                 jsonObject.addProperty("userName", ((MainActivity) getActivity()).getUserName());
 
                                 MD5 md5 = new MD5();
-                                jsonObject.addProperty("currentPassword", md5.getMD5(currentPassword.getText().toString()));
-                                jsonObject.addProperty("newPassword", md5.getMD5(newPassword.getText().toString()));
+                                jsonObject.addProperty("currentPassword", md5.getMD5(currentPassword));
+                                jsonObject.addProperty("newPassword", md5.getMD5(newPassword));
 
                                 PostChangePassword postChangePassword = new PostChangePassword(context);
                                 postChangePassword.checkServerAvailability(2);
@@ -94,7 +101,6 @@ public class ChangePasswordFragment extends Fragment {
         });
 
         return view;
-
     }
 
     private class PostChangePassword extends PostRequest{
@@ -118,19 +124,27 @@ public class ChangePasswordFragment extends Fragment {
                 JSONObject jsonObject = (JSONObject) jsonArray.get(0);
 
                 if(jsonObject.getBoolean("status")){
-                    Toast.makeText(context, "Password Change Success", Toast.LENGTH_SHORT).show();
-//                    status = jsonObject.get("status").toString();
-//                    AlertDialog.Builder alert = new AlertDialog.Builder(ChangePasswordActivity.this);
-//                    alert.setMessage(status);
-//                    alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-//                        @Override
-//                        public void onClick(DialogInterface dialog, int which) {
-//                            dialog.dismiss();
-//                        }
-//                    });
-//                    alert.show();
+                    AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getContext());
+                    alertDialogBuilder.setCancelable(true);
+                    alertDialogBuilder.setTitle("Project Management");
+                    alertDialogBuilder.setMessage("Password Change Successful");
+                    alertDialogBuilder.setPositiveButton(android.R.string.ok,
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    dialog.cancel();
+                                    getActivity().getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+                                    getActivity().getSupportFragmentManager()
+                                            .beginTransaction()
+                                            .addToBackStack("homeFragment")
+                                            .replace(R.id.fragment_container, new HomeFragment(), "homeFragment")
+                                            .commit();
+                                }
+                            });
+
+                    final AlertDialog alertDialog = alertDialogBuilder.create();
+                    alertDialog.show();
                 }else {
-                    Toast.makeText(context, "Password Change Failure", Toast.LENGTH_SHORT).show();
+                   Toast.makeText(context, "Password Change Unsuccessful", Toast.LENGTH_SHORT).show();
                 }
 
             }catch(JSONException e){

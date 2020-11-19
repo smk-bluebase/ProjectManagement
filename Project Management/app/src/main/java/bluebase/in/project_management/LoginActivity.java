@@ -29,7 +29,7 @@ public class LoginActivity extends AppCompatActivity {
     EditText passwordEditText;
 
     String urlLogin = CommonUtils.IP + "/ATS/atsandroid/login.php";
-    String urlForgotPassword = CommonUtils.IP + "/ATS/atsandroid/forgotpasswordgenerator.php";
+    String urlForgotPassword = CommonUtils.IP + "/ATS/atsandroid/forgotPasswordGenerator.php";
 
     ProgressDialog progressDialog;
     Dialog dialog;

@@ -31,7 +31,7 @@ public class SignUpActivity extends AppCompatActivity {
     Dialog dialog;
 
     String urlSignUp = CommonUtils.IP + "/ATS/atsandroid/signup.php";
-    String urlOTPVerifier = CommonUtils.IP + "/ATS/atsandroid/otpverifier.php";
+    String urlOTPVerifier = CommonUtils.IP + "/ATS/atsandroid/otpVerifier.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
