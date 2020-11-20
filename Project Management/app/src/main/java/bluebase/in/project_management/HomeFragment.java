@@ -33,7 +33,7 @@ public class HomeFragment extends Fragment {
     private String[] displayName = {"Profile",
                                     "Change\nPassword",
                                     "Task\nCreation",
-                                    "Report",
+                                    "Day\nWise\nReport",
                                     "Task\nAllocation",
                                     "Time\nSheet",
                                     "Time\nSheet\nTimer",
@@ -49,7 +49,7 @@ public class HomeFragment extends Fragment {
     private Integer[] imageId = { R.drawable.profile,
                                     R.drawable.change_password,
                                     R.drawable.task_creation,
-                                    R.drawable.report,
+                                    R.drawable.daywise_report,
                                     R.drawable.task_allocation,
                                     R.drawable.time_sheet,
                                     R.drawable.time_sheet_timer,
@@ -77,11 +77,11 @@ public class HomeFragment extends Fragment {
         layoutParams.setMargins(0, 0, 200, height);
         background.setLayoutParams(layoutParams);
 
-        context = getActivity().getApplicationContext();
+        context = getContext();
 
         fragmentMap = new HashMap<>();
 
-        for(int i = 0; i < 14; i++){
+        for(int i = 0; i < 15; i++) {
             nameAndImageMap = new HashMap<>();
             nameAndImageMap.put(displayName[i], imageId[i]);
             fragmentMap.put(CommonUtils.fragmentArray[i], nameAndImageMap);
@@ -338,12 +338,12 @@ public class HomeFragment extends Fragment {
                 recentActivityQueue.addFirst(CommonUtils.fragmentArray[2]);
                 break;
 
-            case "reportFragment":
+            case "daywiseReportFragment":
                 getActivity().getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
                 getActivity().getSupportFragmentManager()
                         .beginTransaction()
                         .addToBackStack(CommonUtils.fragmentArray[3])
-                        .replace(R.id.fragment_container, new ReportFragment(), CommonUtils.fragmentArray[3])
+                        .replace(R.id.fragment_container, new DayWiseReportFragment(), CommonUtils.fragmentArray[3])
                         .commit();
                 if(!recentActivityQueue.remove(CommonUtils.fragmentArray[3])) recentActivityQueue.removeLast();
                 recentActivityQueue.addFirst(CommonUtils.fragmentArray[3]);
@@ -469,6 +469,9 @@ public class HomeFragment extends Fragment {
                 if(!recentActivityQueue.remove(CommonUtils.fragmentArray[14])) recentActivityQueue.removeLast();
                 recentActivityQueue.addFirst(CommonUtils.fragmentArray[14]);
                 break;
+
+            default:
+                // Do Nothing!
 
         }
 
