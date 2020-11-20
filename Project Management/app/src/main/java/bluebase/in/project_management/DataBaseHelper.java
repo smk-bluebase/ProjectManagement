@@ -25,18 +25,18 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         db.execSQL(employeeMasterTable);
 
         // Project Customer Master
-        String projectCustomerMasterTable = "CREATE TABLE project_customer_master (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL," +
-                                            "name VARCHAR NOT NULL, address VARCHAR NOT NULL, in_charge VARCHAR NOT NULL," +
-                                            "gst_number VARCHAR NOT NULL, contact_number INTEGER NOT NULL, status INTEGER NOT NULL, " +
-                                            "created_by INTEGER NOT NULL, created_on VARCHAR NOT NULL)";
+        String projectCustomerMasterTable = "CREATE TABLE project_customer_master (id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                                            "name VARCHAR, address VARCHAR, in_charge VARCHAR," +
+                                            "gst_number VARCHAR, contact_number VARCHAR, status INTEGER, " +
+                                            "created_by INTEGER, created_on VARCHAR)";
         db.execSQL(projectCustomerMasterTable);
 
         // Project Master
-        String projectMasterTable = "CREATE TABLE project_master (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL," +
-                                    "name VARCHAR NOT NULL, customer_id VARCHAR NOT NULL, description VARCHAR NOT NULL," +
-                                    "due_date VARCHAR NOT NULL, duration INTEGER NOT NULL, cost INTEGER NOT NULL, " +
-                                    "status INTEGER NOT NULL, po_number INTEGER NOT NULL, po_detail VARCHAR NOT NULL, " +
-                                    "created_by INTEGER NOT NULL, created_on VARCHAR NOT NULL)";
+        String projectMasterTable = "CREATE TABLE project_master (id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                                    "name VARCHAR, customer_id VARCHAR, description VARCHAR," +
+                                    "due_date VARCHAR, duration INTEGER, cost INTEGER, " +
+                                    "status INTEGER, po_number INTEGER, po_detail VARCHAR, " +
+                                    "created_by INTEGER, created_on VARCHAR)";
         db.execSQL(projectMasterTable);
     }
 
@@ -62,7 +62,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         db.close();
     }
 
-    public void insertProjectCustomerMaster(int id, String name, String address, String inCharge, String gstNumber, int contactNumber, int status, int createdBy, String createdOn){
+    public void insertProjectCustomerMaster(int id, String name, String address, String inCharge, String gstNumber, String contactNumber, int status, int createdBy, String createdOn){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
         cv.put("id", id);

@@ -55,7 +55,7 @@ public abstract class UpdateLocalDatabase {
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
         alertDialogBuilder.setCancelable(false);
         alertDialogBuilder.setTitle("Project Management");
-        alertDialogBuilder.setMessage("Updating Local Database...");
+        alertDialogBuilder.setMessage("Fetching Data...");
 
         LayoutInflater inflater =  (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View dialogView = inflater.inflate(R.layout.progress_dialogs, null);
@@ -144,7 +144,7 @@ public abstract class UpdateLocalDatabase {
                     String address;
                     String inCharge;
                     String gstNumber;
-                    int contactNumber;
+                    String contactNumber;
                     int status;
                     int createdBy;
                     String createdOn;
@@ -154,11 +154,17 @@ public abstract class UpdateLocalDatabase {
                     address = jsonObject.getString("address");
                     inCharge = jsonObject.getString("inCharge");
                     gstNumber = jsonObject.getString("gstNumber");
-                    contactNumber = jsonObject.getInt("contactNumber");
-                    status = jsonObject.getInt("status");
-                    createdBy = jsonObject.getInt("createdBy");
-//                    createdOn = jsonObject.getString("createdOn");
-                    createdOn = "";
+                    contactNumber = jsonObject.getString("contactNumber");
+                    if(!jsonObject.getString("status").equals("null")) status = jsonObject.getInt("status");
+                    else status = -1;
+                    if(!jsonObject.getString("createdBy").equals("null")) createdBy = jsonObject.getInt("createdBy");
+                    else createdBy = -1;
+                    if(!jsonObject.getString("createdOn").equals("null")) {
+                        JSONObject createdOnJSONObject = (JSONObject) jsonObject.get("createdOn");
+                        createdOn = createdOnJSONObject.getString("date");
+                    }else {
+                        createdOn = jsonObject.getString("createdOn");
+                    }
 
                     myDatabase.insertProjectCustomerMaster(id, name, address, inCharge, gstNumber, contactNumber, status, createdBy, createdOn);
                 }
@@ -178,6 +184,7 @@ public abstract class UpdateLocalDatabase {
 
         public void serverAvailability(boolean isServerAvailable){
             if(isServerAvailable){
+                myDatabase.deleteProjectMaster();
                 super.postRequest(urlProjectMaster, new JsonObject());
             }else {
                 Toast.makeText(context, "Connection to the server \nnot Available", Toast.LENGTH_SHORT).show();
@@ -207,14 +214,23 @@ public abstract class UpdateLocalDatabase {
                     customerId = jsonObject.getString("customerId");
                     description = jsonObject.getString("description");
                     dueDate = jsonObject.getString("dueDate");
-                    duration = jsonObject.getInt("duration");
-                    cost = jsonObject.getInt("cost");
-                    status = jsonObject.getInt("status");
-                    poNumber = jsonObject.getInt("poNumber");
+                    if(!jsonObject.getString("duration").equals("null")) duration = jsonObject.getInt("duration");
+                    else duration = -1;
+                    if(!jsonObject.getString("cost").equals("null")) cost = jsonObject.getInt("cost");
+                    else cost = -1;
+                    if(!jsonObject.getString("status").equals("null")) status = jsonObject.getInt("status");
+                    else status = -1;
+                    if(!jsonObject.getString("poNumber").equals("null")) poNumber = jsonObject.getInt("poNumber");
+                    else poNumber = -1;
                     poDetail = jsonObject.getString("poDetail");
-                    createdBy = jsonObject.getInt("createdBy");
-                    createdOn = jsonObject.getString("createdOn");
-                    createdOn = "";
+                    if(!jsonObject.getString("createdBy").equals("null")) createdBy = jsonObject.getInt("createdBy");
+                    else createdBy = -1;
+                    if(!jsonObject.getString("createdOn").equals("null")) {
+                        JSONObject createdOnJSONObject = (JSONObject) jsonObject.get("createdOn");
+                        createdOn = createdOnJSONObject.getString("date");
+                    }else {
+                        createdOn = jsonObject.getString("createdOn");
+                    }
 
                     myDatabase.insertProjectMaster(id, name, customerId, description, dueDate, duration, cost, status, poNumber, poDetail, createdBy, createdOn);
                 }
@@ -267,8 +283,6 @@ public abstract class UpdateLocalDatabase {
 
     public abstract void onPostUpdate();
 
-    protected void finalize(){
-        myDatabase.close();
-    }
+    protected void finalize(){}
 
 }

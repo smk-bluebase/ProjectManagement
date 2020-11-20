@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     Context context = this;
     String userName;
     String email;
+    int userId;
     private DrawerLayout drawer;
     private Deque<String> recentActivityQueue;
 
@@ -38,6 +39,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Intent intent = getIntent();
         userName = intent.getStringExtra("userName");
         email = intent.getStringExtra("email");
+        userId = intent.getIntExtra("userId", -1);
 
         Toolbar toolBar = findViewById(R.id.toolbar);
         setSupportActionBar(toolBar);
@@ -278,6 +280,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     public String getUserName(){
         return userName;
+    }
+
+    public int getUserId(){
+        return userId;
     }
 
     @Override
