@@ -127,12 +127,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 recentActivityQueue.addFirst(CommonUtils.fragmentArray[2]);
                 break;
 
-            case R.id.nav_report:
+            case R.id.nav_daywise_report:
                 getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
                 getSupportFragmentManager()
                         .beginTransaction()
                         .addToBackStack(CommonUtils.fragmentArray[3])
-                        .replace(R.id.fragment_container, new ReportFragment(), CommonUtils.fragmentArray[3])
+                        .replace(R.id.fragment_container, new DayWiseReportFragment(), CommonUtils.fragmentArray[3])
                         .commit();
                 if(!recentActivityQueue.remove(CommonUtils.fragmentArray[3])) recentActivityQueue.removeLast();
                 recentActivityQueue.addFirst(CommonUtils.fragmentArray[3]);
@@ -258,6 +258,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 if(!recentActivityQueue.remove(CommonUtils.fragmentArray[14])) recentActivityQueue.removeLast();
                 recentActivityQueue.addFirst(CommonUtils.fragmentArray[14]);
                 break;
+
+            default:
+                // Do Nothing!
 
         }
 

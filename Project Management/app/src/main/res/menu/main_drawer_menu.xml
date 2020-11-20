@@ -26,9 +26,9 @@
                         android:icon="@drawable/task_creation"
                         android:title="Task Creation"/>
 
-                    <item android:id="@+id/nav_report"
-                        android:icon="@drawable/report"
-                        android:title="Report"/>
+                    <item android:id="@+id/nav_daywise_report"
+                        android:icon="@drawable/daywise_report"
+                        android:title="Daywise Report"/>
 
                     <item android:id="@+id/nav_task_allocation"
                         android:icon="@drawable/task_allocation"

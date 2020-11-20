@@ -6,7 +6,7 @@ public class CommonUtils {
     static String[] fragmentArray = {"profileFragment",
             "changePasswordFragment",
             "taskCreationFragment",
-            "reportFragment",
+            "daywiseReportFragment",
             "taskAllocationFragment",
             "timeSheetFragment",
             "timeSheetTimerFragment",
