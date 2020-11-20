@@ -60,6 +60,7 @@
                     android:layout_height="wrap_content"
                     android:hint="CUSTOMER"
                     android:layout_marginTop="20dp"
+                    android:theme="@style/MaterialTheme"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                     android:layout_below="@id/taskCreationTitle">
 
@@ -77,6 +78,7 @@
                     android:layout_height="wrap_content"
                     android:hint="PROJECT"
                     android:layout_marginTop="10dp"
+                    android:theme="@style/MaterialTheme"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                     android:layout_below="@id/customerTextInputLayout">
 

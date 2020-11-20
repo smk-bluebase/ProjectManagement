@@ -156,7 +156,7 @@ public class LoginActivity extends AppCompatActivity {
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                     intent.putExtra("userName", userNameEditText1.getText().toString());
                     intent.putExtra("email", jsonObject.getString("email"));
-                    intent.putExtra("userId", jsonObject.getInt("userId"));
+                    intent.putExtra("userId", jsonObject.getString("userId"));
                     startActivity(intent);
                 }else {
                     Toast.makeText(getApplicationContext(),"Username or Password Incorrect",Toast.LENGTH_SHORT).show();
