@@ -46,7 +46,7 @@ public class TaskCreationFragment extends Fragment {
     AutoCompleteTextView customerTextView;
     AutoCompleteTextView projectTextView;
     TextView dateTextView;
-    String dateValue;
+    final String[] dateValue = new String[1];
     EditText module;
     EditText task;
     EditText description;
@@ -113,9 +113,9 @@ public class TaskCreationFragment extends Fragment {
                                     month = String.valueOf(monthOfYear + 1);
                                 }
 
-                                String dateValue = dayOfMonth + "-" + month + "-" + year;
-                                dateTextView.setText("Date : " + dateValue);
-                                dateValue = year + "-" + month + "-" + dayOfMonth;
+                                String dateValueStr = dayOfMonth + "-" + month + "-" + year;
+                                dateTextView.setText("Date : " + dateValueStr);
+                                dateValue[0] = year + "-" + month + "-" + dayOfMonth;
                             }
                         }, year, month, day);
                 datePickerDialog.show();
@@ -126,11 +126,6 @@ public class TaskCreationFragment extends Fragment {
         task = view.findViewById(R.id.task);
         description = view.findViewById(R.id.description);
         hours = view.findViewById(R.id.hours);
-
-//        module.setText("module");
-//        task.setText("task1");
-//        description.setText("description");
-//        hours.setText("5");
 
         Button addTask = view.findViewById(R.id.addTask);
 
@@ -155,7 +150,7 @@ public class TaskCreationFragment extends Fragment {
                                             jsonObject.addProperty("module", module.getText().toString());
                                             jsonObject.addProperty("task", task.getText().toString());
                                             jsonObject.addProperty("description", description.getText().toString());
-                                            jsonObject.addProperty("dueDate", dateValue);
+                                            jsonObject.addProperty("dueDate", dateValue[0]);
                                             jsonObject.addProperty("hours", hours.getText().toString());
                                             jsonObject.addProperty("status", 0);
                                             jsonObject.addProperty("createdBy", ((MainActivity) getActivity()).getUserId());

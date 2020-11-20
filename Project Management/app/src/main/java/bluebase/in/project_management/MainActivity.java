@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     Context context = this;
     String userName;
     String email;
-    int userId;
+    String userId;
     private DrawerLayout drawer;
     private Deque<String> recentActivityQueue;
 
@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Intent intent = getIntent();
         userName = intent.getStringExtra("userName");
         email = intent.getStringExtra("email");
-        userId = intent.getIntExtra("userId", -1);
+        userId = intent.getStringExtra("userId");
 
         Toolbar toolBar = findViewById(R.id.toolbar);
         setSupportActionBar(toolBar);
@@ -123,7 +123,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         .addToBackStack(CommonUtils.fragmentArray[2])
                         .replace(R.id.fragment_container, new TaskCreationFragment(), CommonUtils.fragmentArray[2])
                         .commit();
-                if(!recentActivityQueue.remove(CommonUtils.fragmentArray[2]))recentActivityQueue.removeLast();
+                if(!recentActivityQueue.remove(CommonUtils.fragmentArray[2])) recentActivityQueue.removeLast();
                 recentActivityQueue.addFirst(CommonUtils.fragmentArray[2]);
                 break;
 
@@ -282,7 +282,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return userName;
     }
 
-    public int getUserId(){
+    public String getUserId(){
         return userId;
     }
 
