@@ -12,11 +12,11 @@ function sendMail($email, $subject, $message){
    $mail->SMTPSecure = 'ssl';
    $mail->Pool = true;
    $mail->Mailer   = 'smtp';
-   $mail->Username = 'info@bluebase.in';
-   $mail->Password = 'Welcome@321';
+   $mail->Username = '';
+   $mail->Password = '';
 
-   $mail->setFrom('info@bluebase.in', 'ATS');
-   $mail->addReplyTo('info@bluebase.in', 'ATS');
+   $mail->setFrom('', 'ATS');
+   $mail->addReplyTo('', 'ATS');
    $mail->addAddress($email);
 
    $mail->isHTML(true);	
